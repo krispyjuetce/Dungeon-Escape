@@ -43,6 +43,7 @@ public class PlayerAnimations : MonoBehaviour {
 
     public void PlayDeathAnimation()
     {
+        Debug.Log("inside set death trigger");
         _myAnimator.SetTrigger("DeathTrigger");
     }
 }
