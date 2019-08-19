@@ -36,7 +36,15 @@ public class Shop : MonoBehaviour {
     {
         _selectedItem = item_id;
         UIManager.Instance.UpdateSelection(item_id);
-        switch(item_id){
+
+        for(int i=0; i < _items.Length; i++)
+        {
+            if (item_id == _items[i].itemId)
+            {
+                _itemPrice = _items[i].itemCost;
+            }
+        }
+        /*switch(item_id){
             case 1:
                 _itemPrice = _items[0].itemCost;
                 break;
@@ -46,7 +54,7 @@ public class Shop : MonoBehaviour {
             case 3:
                 _itemPrice = _items[2].itemCost;
                 break;
-        }
+        }*/
     }
 
     public void BuyItem()
