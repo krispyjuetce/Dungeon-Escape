@@ -49,7 +49,6 @@ public class UIManager : MonoBehaviour {
 
     public void OpenShop(int playerGemCount,Item[] _items)
     {
-        Debug.Log("Items array size is : " + _items.Length);
         _playerGemCountText.text = playerGemCount.ToString() + "G";
 
         for(int i = 0; i < _items.Length; i++)
@@ -78,8 +77,6 @@ public class UIManager : MonoBehaviour {
 
     public void UpdateLives(int livesRemaining)
     {
-        Debug.Log("Inside Update Lives");
-        
         if (livesRemaining >= 0)
         {
             _healthUnit[livesRemaining].SetActive(false);
