@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Bullet
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Ground
+  - Midground
+  - Farground
+  - Collectible
+  - Foreground
+  - Sword
+  - Player
+  - Enemy
+  - Enemy Weapon
+  - Shop
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Farground
+    uniqueID: 4006258599
+    locked: 0
+  - name: Midground
+    uniqueID: 3659320847
+    locked: 0
+  - name: Ground
+    uniqueID: 3456783827
+    locked: 0
+  - name: Collectible
+    uniqueID: 4128552101
+    locked: 0
+  - name: Foreground
+    uniqueID: 2624029211
+    locked: 0
