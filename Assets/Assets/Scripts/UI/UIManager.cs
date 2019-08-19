@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour {
         for(int i = 0; i < _items.Length; i++)
         {
             _itemNamesText[i].text = _items[i].itemName;
-            _itemCostsText[i].text = _items[i].itemCost.ToString();
+            _itemCostsText[i].text = _items[i].itemCost.ToString()+"G";
         }
     }
 

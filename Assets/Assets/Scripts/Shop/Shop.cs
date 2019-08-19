@@ -32,6 +32,11 @@ public class Shop : MonoBehaviour {
         _shopPanel.SetActive(false);
     }
 
+    public void ClosePopUp()
+    {
+        _shopPanel.SetActive(false);
+    }
+
     public void SelectItem(int item_id)
     {
         _selectedItem = item_id;
@@ -44,17 +49,7 @@ public class Shop : MonoBehaviour {
                 _itemPrice = _items[i].itemCost;
             }
         }
-        /*switch(item_id){
-            case 1:
-                _itemPrice = _items[0].itemCost;
-                break;
-            case 2:
-                _itemPrice = _items[1].itemCost;
-                break;
-            case 3:
-                _itemPrice = _items[2].itemCost;
-                break;
-        }*/
+        
     }
 
     public void BuyItem()
