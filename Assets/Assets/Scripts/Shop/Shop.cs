@@ -8,6 +8,13 @@ public class Shop : MonoBehaviour {
     private int _selectedItem;
     private int _itemPrice;
     private Player _player;
+    [SerializeField]
+    private Item[] _items;
+
+    private void Start()
+    {
+        
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,7 +22,7 @@ public class Shop : MonoBehaviour {
 
         if (_player != null)
         {
-            UIManager.Instance.OpenShop(_player.diamonds);
+            UIManager.Instance.OpenShop(_player.diamonds,_items);
         }
         _shopPanel.SetActive(true);
     }
@@ -31,13 +38,13 @@ public class Shop : MonoBehaviour {
         UIManager.Instance.UpdateSelection(item_id);
         switch(item_id){
             case 1:
-                _itemPrice = 20;
+                _itemPrice = _items[0].itemCost;
                 break;
             case 2:
-                _itemPrice = 30;
+                _itemPrice = _items[1].itemCost;
                 break;
             case 3:
-                _itemPrice = 10;
+                _itemPrice = _items[2].itemCost;
                 break;
         }
     }
@@ -59,7 +66,7 @@ public class Shop : MonoBehaviour {
                     GameManager.Instance.HasKeyToCastle = true;
                     break;
             }
-            
+            Debug.Log("Item bought with price : " + _itemPrice);
             _player.diamonds = _player.diamonds - _itemPrice;
             UIManager.Instance.UpdatePlayerGemCount(_player.diamonds);
             UIManager.Instance.UpdatePlayerShopGemCount(_player.diamonds);

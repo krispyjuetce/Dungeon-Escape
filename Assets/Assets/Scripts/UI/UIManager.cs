@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour {
 
     private void Awake()
     {
-        Debug.Log("On awake instance created for UIManager");
         _instance = this;
     }
     [SerializeField]
@@ -32,9 +31,9 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private GameObject[] _healthUnit;
     [SerializeField]
-    private Text[] _itemNames;
+    private Text[] _itemNamesText;
     [SerializeField]
-    private Text[] _itemCosts;
+    private Text[] _itemCostsText;
 
     public void UpdatePlayerGemCount(int playerGemCount)
     {
@@ -48,17 +47,16 @@ public class UIManager : MonoBehaviour {
         _playerGemCountText.text = playerGemCount.ToString() + "G";
     }
 
-    public void OpenShop(int playerGemCount)
+    public void OpenShop(int playerGemCount,Item[] _items)
     {
+        Debug.Log("Items array size is : " + _items.Length);
         _playerGemCountText.text = playerGemCount.ToString() + "G";
-        _itemNames[0].text = "Flame Sword";
-        _itemNames[1].text = "Boots of Flight";
-        _itemNames[2].text = "Key to Castle";
 
-        _itemCosts[0].text = "20";
-        _itemCosts[1].text = "30";
-        _itemCosts[2].text = "10";
-
+        for(int i = 0; i < _items.Length; i++)
+        {
+            _itemNamesText[i].text = _items[i].itemName;
+            _itemCostsText[i].text = _items[i].itemCost.ToString();
+        }
     }
 
     public void UpdateSelection(int item_id)
