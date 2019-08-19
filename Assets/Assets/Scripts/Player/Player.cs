@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float _jumpSpeedWithBootsX = 8f;
     [SerializeField] private int _health = 4;
     [SerializeField] private float _delay = 3f;
+    private bool _isDead = false;
     //private float _verticalSpeed = 5f;//delete this variable later. just experimenting mobile inputs
 
     public int Health { get; set; }
@@ -38,7 +39,9 @@ public class Player : MonoBehaviour, IDamageable
         MoveHorizontally();
         Jump();
         Attack();
-	}
+        SpikeDeath();
+
+    }
 
     private void Jump()
     {
@@ -46,7 +49,7 @@ public class Player : MonoBehaviour, IDamageable
         IsGrounded();
         if (Input.GetButtonDown("Jump")||CrossPlatformInputManager.GetButtonDown("Jump"))
         {
-            if (IsGrounded())
+            if (IsGrounded()&&!_isDead)
             {
                 if (GameManager.Instance.HasBootsOfFlight)
                 {
@@ -69,13 +72,15 @@ public class Player : MonoBehaviour, IDamageable
 
     private void MoveHorizontally()
     {
-
-		//float horizontalInput = Input.GetAxisRaw("Horizontal");
-		float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
-        //float verticalInput = CrossPlatformInputManager.GetAxis("Vertical"); //this was a mobile input experiment. can delete
-        //_myRigidBody2D.velocity = new Vector2(horizontalInput * _horizontalSpeed, verticalInput*_verticalSpeed); //this was a mobile input experiment. can delete
-        _myRigidBody2D.velocity = new Vector2(horizontalInput * _horizontalSpeed, _myRigidBody2D.velocity.y);
-        _playerAnimations.PlayRunAnimation(_myRigidBody2D.velocity.x);
+        if (!_isDead)
+        {
+            //float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float horizontalInput = CrossPlatformInputManager.GetAxis("Horizontal");
+            //float verticalInput = CrossPlatformInputManager.GetAxis("Vertical"); //this was a mobile input experiment. can delete
+            //_myRigidBody2D.velocity = new Vector2(horizontalInput * _horizontalSpeed, verticalInput*_verticalSpeed); //this was a mobile input experiment. can delete
+            _myRigidBody2D.velocity = new Vector2(horizontalInput * _horizontalSpeed, _myRigidBody2D.velocity.y);
+            _playerAnimations.PlayRunAnimation(_myRigidBody2D.velocity.x);
+        }
     }
 
     private void Attack()
@@ -105,6 +110,22 @@ public class Player : MonoBehaviour, IDamageable
         return _isGrounded;
     }
 
+    private void SpikeDeath()
+    {
+        if (_isDead)
+        {
+            return;
+        }
+        RaycastHit2D spikeHitInfo = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Spikes"));
+        if(spikeHitInfo.collider != null)
+        {
+            Debug.Log("SpikeDeath");
+            _isDead = true;
+            _playerAnimations.PlayDeathAnimation();
+            StartCoroutine(LoadMainMenuAfterDelay());
+        }
+    }
+
     public void Damage()
     {
         Health--;
@@ -113,10 +134,9 @@ public class Player : MonoBehaviour, IDamageable
         //_playerAnimations.PlayHitAnimation();
         if (Health < 1)
         {
+            _isDead = true;
             _playerAnimations.PlayDeathAnimation();
             StartCoroutine(LoadMainMenuAfterDelay());
-            //_myCollider2D.enabled = false;
-            //_myRigidBody2D.gravityScale=0;
         }
 
     }
