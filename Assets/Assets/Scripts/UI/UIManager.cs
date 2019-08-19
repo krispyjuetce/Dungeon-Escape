@@ -20,27 +20,45 @@ public class UIManager : MonoBehaviour {
 
     private void Awake()
     {
+        Debug.Log("On awake instance created for UIManager");
         _instance = this;
     }
     [SerializeField]
-    private Text playerGemCountText;
+    private Text _playerGemCountText;
     [SerializeField]
-    private Image selectionImage;
+    private Image _selectionImage;
     [SerializeField]
-    private Text playerGemCountHudText;
+    private Text _playerGemCountHudText;
     [SerializeField]
-    private GameObject[] healthUnit;
-    
+    private GameObject[] _healthUnit;
+    [SerializeField]
+    private Text[] _itemNames;
+    [SerializeField]
+    private Text[] _itemCosts;
 
     public void UpdatePlayerGemCount(int playerGemCount)
     {
-        playerGemCountHudText.text = playerGemCount.ToString();
+        _playerGemCountHudText.text = playerGemCount.ToString();
+        
+        
+    }
+
+    public void UpdatePlayerShopGemCount(int playerGemCount)
+    {
+        _playerGemCountText.text = playerGemCount.ToString() + "G";
     }
 
     public void OpenShop(int playerGemCount)
     {
-        playerGemCountText.text = playerGemCount.ToString() + "G";
-        
+        _playerGemCountText.text = playerGemCount.ToString() + "G";
+        _itemNames[0].text = "Flame Sword";
+        _itemNames[1].text = "Boots of Flight";
+        _itemNames[2].text = "Key to Castle";
+
+        _itemCosts[0].text = "20";
+        _itemCosts[1].text = "30";
+        _itemCosts[2].text = "10";
+
     }
 
     public void UpdateSelection(int item_id)
@@ -48,13 +66,13 @@ public class UIManager : MonoBehaviour {
         switch (item_id)
         {
             case 1:
-                selectionImage.rectTransform.anchoredPosition = new Vector2(selectionImage.rectTransform.anchoredPosition.x, 77f);//bad code to hard code this. change later
+                _selectionImage.rectTransform.anchoredPosition = new Vector2(_selectionImage.rectTransform.anchoredPosition.x, 77f);//bad code to hard code this. change later
                 break;
             case 2:
-                selectionImage.rectTransform.anchoredPosition = new Vector2(selectionImage.rectTransform.anchoredPosition.x, -39f);
+                _selectionImage.rectTransform.anchoredPosition = new Vector2(_selectionImage.rectTransform.anchoredPosition.x, -39f);
                 break;
             case 3:
-                selectionImage.rectTransform.anchoredPosition = new Vector2(selectionImage.rectTransform.anchoredPosition.x, -146f);
+                _selectionImage.rectTransform.anchoredPosition = new Vector2(_selectionImage.rectTransform.anchoredPosition.x, -146f);
                 break;
         }
         
@@ -66,7 +84,7 @@ public class UIManager : MonoBehaviour {
         
         if (livesRemaining >= 0)
         {
-            healthUnit[livesRemaining].SetActive(false);
+            _healthUnit[livesRemaining].SetActive(false);
         }
 
     }

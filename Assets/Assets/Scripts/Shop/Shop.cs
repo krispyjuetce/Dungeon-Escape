@@ -62,6 +62,7 @@ public class Shop : MonoBehaviour {
             
             _player.diamonds = _player.diamonds - _itemPrice;
             UIManager.Instance.UpdatePlayerGemCount(_player.diamonds);
+            UIManager.Instance.UpdatePlayerShopGemCount(_player.diamonds);
             Debug.Log("Item Purchased: " + _selectedItem+" balance gems : "+_player.diamonds);
         }
         else
